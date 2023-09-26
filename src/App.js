@@ -1,24 +1,21 @@
-import logo from './logo.svg';
+
+import { useState } from 'react';
 import './App.css';
 
+import AppContext from './AppContext';
+import Comp1 from './components/Comp1';
+
+
 function App() {
+
+  const [name, setName] = useState('Mohamed')
+  const [age, setAge] = useState(12)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    
+    <AppContext.Provider value={{name, setName, age}}>
+      <Comp1 />
+    </AppContext.Provider>
   );
 }
 
