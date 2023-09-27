@@ -1,22 +1,18 @@
-
-import { useState } from 'react';
 import './App.css';
 
-import AppContext from './AppContext';
+import  { ProductProvider } from './AppContext';
 import Project from './components/Project';
-import { getProducts } from './services/ProductService'
+
 
 function App() {
-  
-  const [products, setProducts] = useState([])
-  console.log('products on the app :',products)
+ 
   return (
     
-    <AppContext.Provider value={{getProducts, products, setProducts}}>
+    <ProductProvider>
       <div className="container">
-        <Project /> 
+        <Project />
       </div>
-    </AppContext.Provider>
+    </ProductProvider>
   );
 }
 

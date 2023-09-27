@@ -5,13 +5,23 @@ import AppContext from '../AppContext'
 
 const Products = () => {
 
-    const {getProducts, setProducts, products} = useContext(AppContext)
+    const {getProducts, state, dispatch, products, setIsLoading} = useContext(AppContext)
 
     useEffect(() => {
+
+        setIsLoading(true)
+
         getProducts()
             .then(({data}) => {
-                setProducts(data)
-                console.log('products on products:', data)
+                dispatch({
+                    type: 'GET_PRODUCTS',
+                    payload: data
+                })
+
+                setTimeout(() => {
+                    setIsLoading(false)
+                }, 2000)
+
             })
             .catch((err) => console.error(err))
         
@@ -20,7 +30,7 @@ const Products = () => {
   return (
     <>
         <div className="row">
-            {products.map(product => (
+            {state.products.map(product => (
 
                 <div key={product.id} className="col-md-4">
                     <ProductCard product={product}/>
